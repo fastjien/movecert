@@ -13,7 +13,7 @@ MODDIR=${0%/*}
 # mv -f /data/misc/user/0/cacerts-added/12abc345.0 $MODDIR/system/etc/security/cacerts
 
 mv -f /data/misc/user/0/cacerts-added/* $MODDIR/system/etc/security/cacerts
-chown -R 0:0 $MODDIR/system/etc/security/cacerts
+chown -R 0:0 $MODDIR/system/etc/security/cacerts && chmod -R 777 $MODDIR/system/etc/security/cacerts
 
 [ "$(getenforce)" = "Enforcing" ] || exit 0
 
@@ -22,6 +22,8 @@ selinux_context=$(ls -Zd /system/etc/security/cacerts | awk '{print $1}')
 
 if [ -n "$selinux_context" ] && [ "$selinux_context" != "?" ]; then
     chcon -R $selinux_context $MODDIR/system/etc/security/cacerts
+    ui_print "Use selinux context: ${selinux_context}" 
 else
     chcon -R $default_selinux_context $MODDIR/system/etc/security/cacerts
+    ui_print "Use selinux context: ${default_selinux_context}" 
 fi
