@@ -9,9 +9,10 @@ function main() {
   fi
   if [[ -e "$zip_filename" ]]; then
     rm "$zip_filename"
-    printf "delete ./%s" "$zip_filename"
+    printf ">>> delete ./%s\n" "$zip_filename"
   fi
-  zip -r "$zip_filename" ./* -x 'venv/*' -x README.md
+  #  zip -q -r "$zip_filename" . -x 'venv/*' -x '.git/*' -x '.idea/*' -x 'package_module.sh' -x README.md
+  zip -q -r "$zip_filename" common META-INF system .gitattributes install.sh module.prop
   printf ">>> Package to %s\n" "$zip_filename"
 }
 
