@@ -1,4 +1,9 @@
 # **Move Certificates**
+
+个人简单修改，添加对权限的正确设置
+
+<hr/>
+
 ## Description
 Moves certificates from the user certificate store to the system store. Also removes the *Network may be monitored* warning.
 
